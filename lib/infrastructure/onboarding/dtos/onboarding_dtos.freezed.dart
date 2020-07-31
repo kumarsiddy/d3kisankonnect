@@ -337,12 +337,18 @@ class _$SignUpDtoTearOff {
   const _$SignUpDtoTearOff();
 
 // ignore: unused_element
-  _SignUpDto call({String name, String email, String mobile, String password}) {
+  _SignUpDto call(
+      {@required String name,
+      @required String email,
+      @required String mobile,
+      @required String password,
+      @required String gender}) {
     return _SignUpDto(
       name: name,
       email: email,
       mobile: mobile,
       password: password,
+      gender: gender,
     );
   }
 }
@@ -355,6 +361,7 @@ mixin _$SignUpDto {
   String get email;
   String get mobile;
   String get password;
+  String get gender;
 
   Map<String, dynamic> toJson();
   $SignUpDtoCopyWith<SignUpDto> get copyWith;
@@ -363,7 +370,12 @@ mixin _$SignUpDto {
 abstract class $SignUpDtoCopyWith<$Res> {
   factory $SignUpDtoCopyWith(SignUpDto value, $Res Function(SignUpDto) then) =
       _$SignUpDtoCopyWithImpl<$Res>;
-  $Res call({String name, String email, String mobile, String password});
+  $Res call(
+      {String name,
+      String email,
+      String mobile,
+      String password,
+      String gender});
 }
 
 class _$SignUpDtoCopyWithImpl<$Res> implements $SignUpDtoCopyWith<$Res> {
@@ -379,12 +391,14 @@ class _$SignUpDtoCopyWithImpl<$Res> implements $SignUpDtoCopyWith<$Res> {
     Object email = freezed,
     Object mobile = freezed,
     Object password = freezed,
+    Object gender = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as String,
       email: email == freezed ? _value.email : email as String,
       mobile: mobile == freezed ? _value.mobile : mobile as String,
       password: password == freezed ? _value.password : password as String,
+      gender: gender == freezed ? _value.gender : gender as String,
     ));
   }
 }
@@ -394,7 +408,12 @@ abstract class _$SignUpDtoCopyWith<$Res> implements $SignUpDtoCopyWith<$Res> {
           _SignUpDto value, $Res Function(_SignUpDto) then) =
       __$SignUpDtoCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String email, String mobile, String password});
+  $Res call(
+      {String name,
+      String email,
+      String mobile,
+      String password,
+      String gender});
 }
 
 class __$SignUpDtoCopyWithImpl<$Res> extends _$SignUpDtoCopyWithImpl<$Res>
@@ -411,19 +430,31 @@ class __$SignUpDtoCopyWithImpl<$Res> extends _$SignUpDtoCopyWithImpl<$Res>
     Object email = freezed,
     Object mobile = freezed,
     Object password = freezed,
+    Object gender = freezed,
   }) {
     return _then(_SignUpDto(
       name: name == freezed ? _value.name : name as String,
       email: email == freezed ? _value.email : email as String,
       mobile: mobile == freezed ? _value.mobile : mobile as String,
       password: password == freezed ? _value.password : password as String,
+      gender: gender == freezed ? _value.gender : gender as String,
     ));
   }
 }
 
 @JsonSerializable()
 class _$_SignUpDto with DiagnosticableTreeMixin implements _SignUpDto {
-  const _$_SignUpDto({this.name, this.email, this.mobile, this.password});
+  const _$_SignUpDto(
+      {@required this.name,
+      @required this.email,
+      @required this.mobile,
+      @required this.password,
+      @required this.gender})
+      : assert(name != null),
+        assert(email != null),
+        assert(mobile != null),
+        assert(password != null),
+        assert(gender != null);
 
   factory _$_SignUpDto.fromJson(Map<String, dynamic> json) =>
       _$_$_SignUpDtoFromJson(json);
@@ -436,10 +467,12 @@ class _$_SignUpDto with DiagnosticableTreeMixin implements _SignUpDto {
   final String mobile;
   @override
   final String password;
+  @override
+  final String gender;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignUpDto(name: $name, email: $email, mobile: $mobile, password: $password)';
+    return 'SignUpDto(name: $name, email: $email, mobile: $mobile, password: $password, gender: $gender)';
   }
 
   @override
@@ -450,7 +483,8 @@ class _$_SignUpDto with DiagnosticableTreeMixin implements _SignUpDto {
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('mobile', mobile))
-      ..add(DiagnosticsProperty('password', password));
+      ..add(DiagnosticsProperty('password', password))
+      ..add(DiagnosticsProperty('gender', gender));
   }
 
   @override
@@ -465,7 +499,9 @@ class _$_SignUpDto with DiagnosticableTreeMixin implements _SignUpDto {
                 const DeepCollectionEquality().equals(other.mobile, mobile)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
-                    .equals(other.password, password)));
+                    .equals(other.password, password)) &&
+            (identical(other.gender, gender) ||
+                const DeepCollectionEquality().equals(other.gender, gender)));
   }
 
   @override
@@ -474,7 +510,8 @@ class _$_SignUpDto with DiagnosticableTreeMixin implements _SignUpDto {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(mobile) ^
-      const DeepCollectionEquality().hash(password);
+      const DeepCollectionEquality().hash(password) ^
+      const DeepCollectionEquality().hash(gender);
 
   @override
   _$SignUpDtoCopyWith<_SignUpDto> get copyWith =>
@@ -488,10 +525,11 @@ class _$_SignUpDto with DiagnosticableTreeMixin implements _SignUpDto {
 
 abstract class _SignUpDto implements SignUpDto {
   const factory _SignUpDto(
-      {String name,
-      String email,
-      String mobile,
-      String password}) = _$_SignUpDto;
+      {@required String name,
+      @required String email,
+      @required String mobile,
+      @required String password,
+      @required String gender}) = _$_SignUpDto;
 
   factory _SignUpDto.fromJson(Map<String, dynamic> json) =
       _$_SignUpDto.fromJson;
@@ -504,6 +542,8 @@ abstract class _SignUpDto implements SignUpDto {
   String get mobile;
   @override
   String get password;
+  @override
+  String get gender;
   @override
   _$SignUpDtoCopyWith<_SignUpDto> get copyWith;
 }

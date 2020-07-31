@@ -6,9 +6,12 @@ import 'package:flutter/material.dart';
 abstract class IAuthFacade {
   Future<bool> isUserSignedIn();
 
-  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
+  Future<Either<AuthFailure, Unit>> signUp({
+    @required Name name,
     @required EmailAddress emailAddress,
     @required Password password,
+    @required Mobile mobile,
+    @required Gender gender,
   });
 
   Future<Either<AuthFailure, Unit>> signIn({

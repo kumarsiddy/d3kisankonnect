@@ -54,3 +54,16 @@ class Mobile extends ValueObject<String> {
 
   Mobile._(this.value);
 }
+
+class Gender extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Gender(String input) {
+    assert(input != null);
+
+    return Gender._(validateGender(input));
+  }
+
+  Gender._(this.value);
+}

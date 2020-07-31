@@ -1,7 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:d3kisankonnect/application/onboarding/sign_up/sign_up_bloc.dart';
+import 'package:d3kisankonnect/domain/onboarding/value_objects.dart';
 import 'package:d3kisankonnect/presentation/core/colors.dart';
 import 'package:d3kisankonnect/presentation/core/customview/button.dart';
 import 'package:d3kisankonnect/presentation/core/customview/text.dart';
+import 'package:d3kisankonnect/presentation/routes/router.gr.dart';
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,14 +23,22 @@ class _SignUpState extends State<SignUpForm> {
   static const EMAIL = 'email';
   static const MOBILE = 'mobile';
   static const PASSWORD = 'password';
-  static const CONFIRM_PASSWORD = 'confirm_password';
 
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpBloc, SignUpState>(
-      listener: (BuildContext context, SignUpState signUpState) => {},
+      listener: (BuildContext context, SignUpState signUpState) {
+        signUpState.map(
+            initial: (initial) {},
+            signedUp: (signedUp) {
+              FlushbarHelper.createError(message: "Success").show(context);
+              ExtendedNavigator.of(context).pop(Routes.signUpPage);
+              ExtendedNavigator.of(context).pushHomePage();
+            },
+            unauthenticated: (unauthenticated) {});
+      },
       builder: (BuildContext context, SignUpState signUpState) =>
           _getSignupForm(context),
     );
@@ -49,7 +61,7 @@ class _SignUpState extends State<SignUpForm> {
               children: [
                 RichText(
                   text: TextSpan(
-                    text: 'Welcome to',
+                    text: 'Welcome to\n',
                     style: TextStyle(
                       color: AppColor.BLACK.color,
                       fontSize: 18,
@@ -159,7 +171,7 @@ class _SignUpState extends State<SignUpForm> {
                 FormBuilderTextField(
                   attribute: PASSWORD,
                   controller: _passController,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                   obscureText: true,
                   maxLines: 1,
                   decoration: InputDecoration(
@@ -170,28 +182,7 @@ class _SignUpState extends State<SignUpForm> {
                     FormBuilderValidators.minLength(5,
                         errorText: 'Enter password'),
                   ],
-                  onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                ),
-                SizedBox(height: 16),
-                FormBuilderTextField(
-                  attribute: CONFIRM_PASSWORD,
-                  textInputAction: TextInputAction.done,
-                  obscureText: true,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    labelText: 'Confirm pasword',
-                  ),
-                  keyboardType: TextInputType.visiblePassword,
-                  validators: [
-                    FormBuilderValidators.minLength(5,
-                        errorText: 'Enter password'),
-                    (value) {
-                      if (value != _passController.text) {
-                        return 'password not matching';
-                      }
-                      return null;
-                    },
-                  ],
+                  onFieldSubmitted: (_) => FocusScope.of(context).dispose(),
                 ),
               ],
             ),
@@ -214,6 +205,23 @@ class _SignUpState extends State<SignUpForm> {
   }
 
   onSubmit() {
-    if (_fbKey.currentState.saveAndValidate()) {}
+    if (_fbKey.currentState.saveAndValidate()) {
+      final EmailAddress emailAddress =
+          EmailAddress(_fbKey.currentState.value[EMAIL]);
+      final Name name = Name(_fbKey.currentState.value[NAME]);
+      final Mobile mobile = Mobile(_fbKey.currentState.value[MOBILE]);
+      final Password password = Password(_fbKey.currentState.value[PASSWORD]);
+      final Gender gender = Gender(_fbKey.currentState.value[GENDER]);
+
+      context.bloc<SignUpBloc>().add(
+            SignUpEvent.onSignUp(
+              name: name,
+              emailAddress: emailAddress,
+              password: password,
+              mobile: mobile,
+              gender: gender,
+            ),
+          );
+    }
   }
 }

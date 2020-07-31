@@ -29,10 +29,11 @@ abstract class SignInResponseDto implements _$SignInResponseDto {
 @freezed
 abstract class SignUpDto implements _$SignUpDto {
   const factory SignUpDto({
-    String name,
-    String email,
-    String mobile,
-    String password,
+    @required String name,
+    @required String email,
+    @required String mobile,
+    @required String password,
+    @required String gender,
   }) = _SignUpDto;
 
   factory SignUpDto.fromJson(Map<String, dynamic> json) =>

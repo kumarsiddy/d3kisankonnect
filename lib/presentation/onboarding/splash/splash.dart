@@ -13,10 +13,10 @@ class SplashPage extends StatelessWidget {
         state.map(initial: (_) {
           print('initial');
         }, authenticated: (_) {
-          ExtendedNavigator.of(context).popUntil((route) => false);
+          ExtendedNavigator.of(context).pop(Routes.splashPage);
           ExtendedNavigator.of(context).pushHomePage();
         }, unaunthenticated: (_) {
-          ExtendedNavigator.of(context).popUntil((route) => false);
+          ExtendedNavigator.of(context).pop(Routes.splashPage);
           ExtendedNavigator.of(context).pushSignInPage();
         });
       },

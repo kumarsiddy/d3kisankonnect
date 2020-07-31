@@ -16,4 +16,7 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
 
   const factory ValueFailure.invalidMobile({@required String mobileString}) =
       InvalidMobile<T>;
+
+  const factory ValueFailure.invalidGender({@required String genderString}) =
+      InvalidGender<T>;
 }

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:d3kisankonnect/application/onboarding/sign_in/sign_in_bloc.dart';
+import 'package:d3kisankonnect/domain/onboarding/value_objects.dart';
 import 'package:d3kisankonnect/presentation/core/colors.dart';
 import 'package:d3kisankonnect/presentation/core/customview/button.dart';
 import 'package:d3kisankonnect/presentation/core/customview/text.dart';
@@ -20,7 +21,7 @@ class _SignInState extends State<SignInForm> {
   static const PASSWORD = 'password';
 
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
-  bool _autoValidate = false;
+  bool _autoValidate = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,8 @@ class _SignInState extends State<SignInForm> {
             initial: (Initial value) {},
             signedInUsingEmailAndPassword:
                 (SignedInUsingEmailAndPassword value) {
-              ExtendedNavigator.of(context).popUntil((route) => false);
+              FlushbarHelper.createError(message: "Success").show(context);
+              ExtendedNavigator.of(context).pop(Routes.signInPage);
               ExtendedNavigator.of(context).pushHomePage();
             },
             unauthenticated: (Unauthenticated value) {
@@ -60,7 +62,7 @@ class _SignInState extends State<SignInForm> {
                 children: [
                   RichText(
                     text: TextSpan(
-                      text: 'Sign in to',
+                      text: 'Sign in to\n',
                       style: TextStyle(
                         color: AppColor.BLACK.color,
                         fontSize: 18,
@@ -97,6 +99,7 @@ class _SignInState extends State<SignInForm> {
                 validators: [
                   FormBuilderValidators.minLength(3),
                   FormBuilderValidators.maxLength(50),
+                  FormBuilderValidators.email(),
                 ],
                 onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
               ),
@@ -143,9 +146,22 @@ class _SignInState extends State<SignInForm> {
   }
 
   onRegister() {
-    ExtendedNavigator.of(context).popUntil((route) => false);
     ExtendedNavigator.of(context).pushSignUpPage();
+    ExtendedNavigator.of(context).pop(Routes.signInPage);
   }
 
-  onSubmit() {}
+  onSubmit() {
+    if (_fbKey.currentState.saveAndValidate()) {
+      final EmailAddress emailAddress =
+          EmailAddress(_fbKey.currentState.value[EMAIL]);
+      final Password password = Password(_fbKey.currentState.value[PASSWORD]);
+
+      context.bloc<SignInBloc>().add(
+            SignInEvent.onSignIn(
+              emailAddress: emailAddress,
+              password: password,
+            ),
+          );
+    }
+  }
 }

@@ -1,6 +1,8 @@
 part of 'sign_up_bloc.dart';
 
-@immutable
-abstract class SignUpState {}
-
-class SignUpInitial extends SignUpState {}
+@freezed
+abstract class SignUpState with _$SignUpState {
+  const factory SignUpState.initial() = Initial;
+  const factory SignUpState.signedUp() = SignedUp;
+  const factory SignUpState.unauthenticated() = Unauthenticated;
+}

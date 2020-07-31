@@ -39,6 +39,13 @@ class _$ValueFailureTearOff {
       mobileString: mobileString,
     );
   }
+
+// ignore: unused_element
+  InvalidGender<T> invalidGender<T>({@required String genderString}) {
+    return InvalidGender<T>(
+      genderString: genderString,
+    );
+  }
 }
 
 // ignore: unused_element
@@ -51,6 +58,7 @@ mixin _$ValueFailure<T> {
     @required Result invalidName(String nameString),
     @required Result invalidPassword(String passwordString),
     @required Result invalidMobile(String mobileString),
+    @required Result invalidGender(String genderString),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
@@ -58,6 +66,7 @@ mixin _$ValueFailure<T> {
     Result invalidName(String nameString),
     Result invalidPassword(String passwordString),
     Result invalidMobile(String mobileString),
+    Result invalidGender(String genderString),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -66,6 +75,7 @@ mixin _$ValueFailure<T> {
     @required Result invalidName(InvalidName<T> value),
     @required Result invalidPassword(InvalidPassword<T> value),
     @required Result invalidMobile(InvalidMobile<T> value),
+    @required Result invalidGender(InvalidGender<T> value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
@@ -73,6 +83,7 @@ mixin _$ValueFailure<T> {
     Result invalidName(InvalidName<T> value),
     Result invalidPassword(InvalidPassword<T> value),
     Result invalidMobile(InvalidMobile<T> value),
+    Result invalidGender(InvalidGender<T> value),
     @required Result orElse(),
   });
 }
@@ -166,11 +177,13 @@ class _$InvalidEmail<T>
     @required Result invalidName(String nameString),
     @required Result invalidPassword(String passwordString),
     @required Result invalidMobile(String mobileString),
+    @required Result invalidGender(String genderString),
   }) {
     assert(invalidEmail != null);
     assert(invalidName != null);
     assert(invalidPassword != null);
     assert(invalidMobile != null);
+    assert(invalidGender != null);
     return invalidEmail(emailString);
   }
 
@@ -181,6 +194,7 @@ class _$InvalidEmail<T>
     Result invalidName(String nameString),
     Result invalidPassword(String passwordString),
     Result invalidMobile(String mobileString),
+    Result invalidGender(String genderString),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -197,11 +211,13 @@ class _$InvalidEmail<T>
     @required Result invalidName(InvalidName<T> value),
     @required Result invalidPassword(InvalidPassword<T> value),
     @required Result invalidMobile(InvalidMobile<T> value),
+    @required Result invalidGender(InvalidGender<T> value),
   }) {
     assert(invalidEmail != null);
     assert(invalidName != null);
     assert(invalidPassword != null);
     assert(invalidMobile != null);
+    assert(invalidGender != null);
     return invalidEmail(this);
   }
 
@@ -212,6 +228,7 @@ class _$InvalidEmail<T>
     Result invalidName(InvalidName<T> value),
     Result invalidPassword(InvalidPassword<T> value),
     Result invalidMobile(InvalidMobile<T> value),
+    Result invalidGender(InvalidGender<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -301,11 +318,13 @@ class _$InvalidName<T> with DiagnosticableTreeMixin implements InvalidName<T> {
     @required Result invalidName(String nameString),
     @required Result invalidPassword(String passwordString),
     @required Result invalidMobile(String mobileString),
+    @required Result invalidGender(String genderString),
   }) {
     assert(invalidEmail != null);
     assert(invalidName != null);
     assert(invalidPassword != null);
     assert(invalidMobile != null);
+    assert(invalidGender != null);
     return invalidName(nameString);
   }
 
@@ -316,6 +335,7 @@ class _$InvalidName<T> with DiagnosticableTreeMixin implements InvalidName<T> {
     Result invalidName(String nameString),
     Result invalidPassword(String passwordString),
     Result invalidMobile(String mobileString),
+    Result invalidGender(String genderString),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -332,11 +352,13 @@ class _$InvalidName<T> with DiagnosticableTreeMixin implements InvalidName<T> {
     @required Result invalidName(InvalidName<T> value),
     @required Result invalidPassword(InvalidPassword<T> value),
     @required Result invalidMobile(InvalidMobile<T> value),
+    @required Result invalidGender(InvalidGender<T> value),
   }) {
     assert(invalidEmail != null);
     assert(invalidName != null);
     assert(invalidPassword != null);
     assert(invalidMobile != null);
+    assert(invalidGender != null);
     return invalidName(this);
   }
 
@@ -347,6 +369,7 @@ class _$InvalidName<T> with DiagnosticableTreeMixin implements InvalidName<T> {
     Result invalidName(InvalidName<T> value),
     Result invalidPassword(InvalidPassword<T> value),
     Result invalidMobile(InvalidMobile<T> value),
+    Result invalidGender(InvalidGender<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -440,11 +463,13 @@ class _$InvalidPassword<T>
     @required Result invalidName(String nameString),
     @required Result invalidPassword(String passwordString),
     @required Result invalidMobile(String mobileString),
+    @required Result invalidGender(String genderString),
   }) {
     assert(invalidEmail != null);
     assert(invalidName != null);
     assert(invalidPassword != null);
     assert(invalidMobile != null);
+    assert(invalidGender != null);
     return invalidPassword(passwordString);
   }
 
@@ -455,6 +480,7 @@ class _$InvalidPassword<T>
     Result invalidName(String nameString),
     Result invalidPassword(String passwordString),
     Result invalidMobile(String mobileString),
+    Result invalidGender(String genderString),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -471,11 +497,13 @@ class _$InvalidPassword<T>
     @required Result invalidName(InvalidName<T> value),
     @required Result invalidPassword(InvalidPassword<T> value),
     @required Result invalidMobile(InvalidMobile<T> value),
+    @required Result invalidGender(InvalidGender<T> value),
   }) {
     assert(invalidEmail != null);
     assert(invalidName != null);
     assert(invalidPassword != null);
     assert(invalidMobile != null);
+    assert(invalidGender != null);
     return invalidPassword(this);
   }
 
@@ -486,6 +514,7 @@ class _$InvalidPassword<T>
     Result invalidName(InvalidName<T> value),
     Result invalidPassword(InvalidPassword<T> value),
     Result invalidMobile(InvalidMobile<T> value),
+    Result invalidGender(InvalidGender<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -579,11 +608,13 @@ class _$InvalidMobile<T>
     @required Result invalidName(String nameString),
     @required Result invalidPassword(String passwordString),
     @required Result invalidMobile(String mobileString),
+    @required Result invalidGender(String genderString),
   }) {
     assert(invalidEmail != null);
     assert(invalidName != null);
     assert(invalidPassword != null);
     assert(invalidMobile != null);
+    assert(invalidGender != null);
     return invalidMobile(mobileString);
   }
 
@@ -594,6 +625,7 @@ class _$InvalidMobile<T>
     Result invalidName(String nameString),
     Result invalidPassword(String passwordString),
     Result invalidMobile(String mobileString),
+    Result invalidGender(String genderString),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -610,11 +642,13 @@ class _$InvalidMobile<T>
     @required Result invalidName(InvalidName<T> value),
     @required Result invalidPassword(InvalidPassword<T> value),
     @required Result invalidMobile(InvalidMobile<T> value),
+    @required Result invalidGender(InvalidGender<T> value),
   }) {
     assert(invalidEmail != null);
     assert(invalidName != null);
     assert(invalidPassword != null);
     assert(invalidMobile != null);
+    assert(invalidGender != null);
     return invalidMobile(this);
   }
 
@@ -625,6 +659,7 @@ class _$InvalidMobile<T>
     Result invalidName(InvalidName<T> value),
     Result invalidPassword(InvalidPassword<T> value),
     Result invalidMobile(InvalidMobile<T> value),
+    Result invalidGender(InvalidGender<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -641,4 +676,149 @@ abstract class InvalidMobile<T> implements ValueFailure<T> {
 
   String get mobileString;
   $InvalidMobileCopyWith<T, InvalidMobile<T>> get copyWith;
+}
+
+abstract class $InvalidGenderCopyWith<T, $Res> {
+  factory $InvalidGenderCopyWith(
+          InvalidGender<T> value, $Res Function(InvalidGender<T>) then) =
+      _$InvalidGenderCopyWithImpl<T, $Res>;
+  $Res call({String genderString});
+}
+
+class _$InvalidGenderCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $InvalidGenderCopyWith<T, $Res> {
+  _$InvalidGenderCopyWithImpl(
+      InvalidGender<T> _value, $Res Function(InvalidGender<T>) _then)
+      : super(_value, (v) => _then(v as InvalidGender<T>));
+
+  @override
+  InvalidGender<T> get _value => super._value as InvalidGender<T>;
+
+  @override
+  $Res call({
+    Object genderString = freezed,
+  }) {
+    return _then(InvalidGender<T>(
+      genderString: genderString == freezed
+          ? _value.genderString
+          : genderString as String,
+    ));
+  }
+}
+
+class _$InvalidGender<T>
+    with DiagnosticableTreeMixin
+    implements InvalidGender<T> {
+  const _$InvalidGender({@required this.genderString})
+      : assert(genderString != null);
+
+  @override
+  final String genderString;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ValueFailure<$T>.invalidGender(genderString: $genderString)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ValueFailure<$T>.invalidGender'))
+      ..add(DiagnosticsProperty('genderString', genderString));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is InvalidGender<T> &&
+            (identical(other.genderString, genderString) ||
+                const DeepCollectionEquality()
+                    .equals(other.genderString, genderString)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(genderString);
+
+  @override
+  $InvalidGenderCopyWith<T, InvalidGender<T>> get copyWith =>
+      _$InvalidGenderCopyWithImpl<T, InvalidGender<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result invalidEmail(String emailString),
+    @required Result invalidName(String nameString),
+    @required Result invalidPassword(String passwordString),
+    @required Result invalidMobile(String mobileString),
+    @required Result invalidGender(String genderString),
+  }) {
+    assert(invalidEmail != null);
+    assert(invalidName != null);
+    assert(invalidPassword != null);
+    assert(invalidMobile != null);
+    assert(invalidGender != null);
+    return invalidGender(genderString);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result invalidEmail(String emailString),
+    Result invalidName(String nameString),
+    Result invalidPassword(String passwordString),
+    Result invalidMobile(String mobileString),
+    Result invalidGender(String genderString),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (invalidGender != null) {
+      return invalidGender(genderString);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result invalidEmail(InvalidEmail<T> value),
+    @required Result invalidName(InvalidName<T> value),
+    @required Result invalidPassword(InvalidPassword<T> value),
+    @required Result invalidMobile(InvalidMobile<T> value),
+    @required Result invalidGender(InvalidGender<T> value),
+  }) {
+    assert(invalidEmail != null);
+    assert(invalidName != null);
+    assert(invalidPassword != null);
+    assert(invalidMobile != null);
+    assert(invalidGender != null);
+    return invalidGender(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result invalidEmail(InvalidEmail<T> value),
+    Result invalidName(InvalidName<T> value),
+    Result invalidPassword(InvalidPassword<T> value),
+    Result invalidMobile(InvalidMobile<T> value),
+    Result invalidGender(InvalidGender<T> value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (invalidGender != null) {
+      return invalidGender(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InvalidGender<T> implements ValueFailure<T> {
+  const factory InvalidGender({@required String genderString}) =
+      _$InvalidGender<T>;
+
+  String get genderString;
+  $InvalidGenderCopyWith<T, InvalidGender<T>> get copyWith;
 }

@@ -21,11 +21,12 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
+  Future<Either<AuthFailure, Unit>> signUp({
     @required Name name,
     @required EmailAddress emailAddress,
     @required Password password,
     @required Mobile mobile,
+    @required Gender gender,
   }) async {
     SignUpResponseDto signUpResponseDto =
         await _retrofitApiClient.signUp(SignUpDto(
@@ -33,9 +34,10 @@ class AuthFacade implements IAuthFacade {
       email: emailAddress.getOrException(),
       password: password.getOrException(),
       mobile: mobile.getOrException(),
+      gender: gender.getOrException(),
     ));
 
-    if (signUpResponseDto != null && signUpResponseDto.isSuccess) {
+    if (signUpResponseDto != null && signUpResponseDto.token != null) {
       return right(unit);
     }
 
@@ -53,7 +55,7 @@ class AuthFacade implements IAuthFacade {
           password: password.getOrException()),
     );
 
-    if (signInResponseDto != null && signInResponseDto.isSuccess) {
+    if (signInResponseDto != null && signInResponseDto.token != null) {
       _sharedPreferenceHandler.saveToken(signInResponseDto.token);
       return right(unit);
     }

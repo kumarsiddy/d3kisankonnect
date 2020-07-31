@@ -20,8 +20,8 @@ Either<ValueFailure<String>, String> validateName(String input) {
 }
 
 Either<ValueFailure<String>, String> validatePassword(String input) {
-  if (input.length >= 6) {
-    right(input);
+  if (input.length >= 5) {
+    return right(input);
   }
 
   return left(ValueFailure.invalidPassword(passwordString: input));
@@ -29,8 +29,16 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
 
 Either<ValueFailure<String>, String> validateMobile(String input) {
   if (input.length == 10) {
-    right(input);
+    return right(input);
   }
 
   return left(ValueFailure.invalidMobile(mobileString: input));
+}
+
+Either<ValueFailure<String>, String> validateGender(String input) {
+  if (input == 'MALE' || input == 'FEMALE') {
+    return right(input);
+  }
+
+  return left(ValueFailure.invalidGender(genderString: input));
 }

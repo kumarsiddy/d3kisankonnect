@@ -14,5 +14,5 @@ abstract class RegisterModule {
 
   @Singleton()
   RetrofitApiClient get retrofitClient =>
-      RetrofitApiClient(dio, baseUrl: '192.168.1.11:3000');
+      RetrofitApiClient(dio, baseUrl: 'http://192.168.1.11:3000');
 }

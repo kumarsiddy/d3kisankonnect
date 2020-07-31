@@ -41,6 +41,7 @@ _$_SignUpDto _$_$_SignUpDtoFromJson(Map<String, dynamic> json) {
     email: json['email'] as String,
     mobile: json['mobile'] as String,
     password: json['password'] as String,
+    gender: json['gender'] as String,
   );
 }
 
@@ -50,6 +51,7 @@ Map<String, dynamic> _$_$_SignUpDtoToJson(_$_SignUpDto instance) =>
       'email': instance.email,
       'mobile': instance.mobile,
       'password': instance.password,
+      'gender': instance.gender,
     };
 
 _$_SignUpResponseDto _$_$_SignUpResponseDtoFromJson(Map<String, dynamic> json) {
