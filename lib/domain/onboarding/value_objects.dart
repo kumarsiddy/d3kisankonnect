@@ -3,6 +3,19 @@ import 'package:d3kisankonnect/domain/core/core_value_failures.dart';
 import 'package:d3kisankonnect/domain/onboarding/value_object_validaors.dart';
 import 'package:dartz/dartz.dart';
 
+class Name extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Name(String input) {
+    assert(input != null);
+
+    return Name._(validateName(input));
+  }
+
+  const Name._(this.value);
+}
+
 class EmailAddress extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -27,4 +40,17 @@ class Password extends ValueObject<String> {
   }
 
   Password._(this.value);
+}
+
+class Mobile extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Mobile(String input) {
+    assert(input != null);
+
+    return Mobile._(validateMobile(input));
+  }
+
+  Mobile._(this.value);
 }

@@ -16,4 +16,8 @@ class SharedPreferenceHandler {
   Future<String> getToken() async {
     return _sharedPreferences.getString(_KEY_TOKEN);
   }
+
+  Future<bool> deleteAll() async {
+    return _sharedPreferences.clear();
+  }
 }

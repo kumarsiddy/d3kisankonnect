@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:d3kisankonnect/application/onboarding/splash/splash_bloc.dart';
 import 'package:d3kisankonnect/presentation/core/colors.dart';
+import 'package:d3kisankonnect/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,9 +13,11 @@ class SplashPage extends StatelessWidget {
         state.map(initial: (_) {
           print('initial');
         }, authenticated: (_) {
-          print('authenicated');
+          ExtendedNavigator.of(context).popUntil((route) => false);
+          ExtendedNavigator.of(context).pushHomePage();
         }, unaunthenticated: (_) {
-          print('unauthenticated');
+          ExtendedNavigator.of(context).popUntil((route) => false);
+          ExtendedNavigator.of(context).pushSignInPage();
         });
       },
       child: _getSplashPageWidget(context),
@@ -90,6 +94,7 @@ class SplashPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  CircularProgressIndicator(),
                 ],
               ),
             ),

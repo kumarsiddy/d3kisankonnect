@@ -26,3 +26,11 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
 
   return left(ValueFailure.invalidPassword(passwordString: input));
 }
+
+Either<ValueFailure<String>, String> validateMobile(String input) {
+  if (input.length == 10) {
+    right(input);
+  }
+
+  return left(ValueFailure.invalidMobile(mobileString: input));
+}

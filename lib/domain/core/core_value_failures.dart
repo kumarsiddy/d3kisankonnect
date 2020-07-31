@@ -13,4 +13,7 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
 
   const factory ValueFailure.invalidPassword(
       {@required String passwordString}) = InvalidPassword<T>;
+
+  const factory ValueFailure.invalidMobile({@required String mobileString}) =
+      InvalidMobile<T>;
 }
