@@ -1,7 +1,7 @@
 import 'package:d3kisankonnect/domain/onboarding/auth_failure.dart';
 import 'package:d3kisankonnect/domain/onboarding/i_auth_facade.dart';
 import 'package:d3kisankonnect/infrastructure/core/api_service/retrofit_api_client.dart';
-import 'package:d3kisankonnect/infrastructure/core/local_storage/shared_preference_handler.dart';
+import 'package:d3kisankonnect/infrastructure/core/local_storage/i_local_storage_facade.dart';
 import 'package:d3kisankonnect/infrastructure/onboarding/dtos/onboarding_dtos.dart';
 import 'package:dartz/dartz.dart';
 import 'package:d3kisankonnect/domain/onboarding/value_objects.dart';
@@ -11,13 +11,16 @@ import 'package:injectable/injectable.dart';
 @Singleton(as: IAuthFacade)
 class AuthFacade implements IAuthFacade {
   final RetrofitApiClient _retrofitApiClient;
-  final SharedPreferenceHandler _sharedPreferenceHandler;
+  final ILocalStorageFacade _localStorageFacade;
 
-  AuthFacade(this._retrofitApiClient, this._sharedPreferenceHandler);
+  AuthFacade(
+    this._retrofitApiClient,
+    this._localStorageFacade,
+  );
 
   @override
   Future<bool> isUserSignedIn() async {
-    return await _sharedPreferenceHandler.getToken() != null;
+    return await _localStorageFacade.getToken() != null;
   }
 
   @override
@@ -56,7 +59,7 @@ class AuthFacade implements IAuthFacade {
     );
 
     if (signInResponseDto != null && signInResponseDto.token != null) {
-      _sharedPreferenceHandler.saveToken(signInResponseDto.token);
+      _localStorageFacade.saveToken(signInResponseDto.token);
       return right(unit);
     }
     return left(AuthFailure.invalidEmailPasswordCombinationError());
@@ -64,7 +67,7 @@ class AuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, bool>> signOut() async {
-    bool isSuccess = await _sharedPreferenceHandler.deleteAll();
+    bool isSuccess = await _localStorageFacade.deleteCache();
 
     if (isSuccess) {
       return right(true);
