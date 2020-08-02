@@ -1,3 +1,4 @@
+import 'package:d3kisankonnect/config_reader.dart';
 import 'package:d3kisankonnect/infrastructure/core/api_service/retrofit_api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
@@ -13,7 +14,7 @@ abstract class RegisterModule {
 
   @Singleton()
   RetrofitApiClient get retrofitClient =>
-      RetrofitApiClient(dio, baseUrl: 'http://192.168.1.11:3000');
+      RetrofitApiClient(dio, baseUrl: ConfigReader.getBaseUrl());
 
   @preResolve
   Future<LazyBox<dynamic>> get userStatusBox => Hive.openLazyBox(_USER_STATUS);

@@ -1,17 +1,21 @@
+import 'package:d3kisankonnect/config_reader.dart';
 import 'package:d3kisankonnect/presentation/core/app_widget.dart';
 import 'package:d3kisankonnect/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 
-void main() async {
+Future<void> mainCommon(String env) async {
+  // Call this if the main method is asynchronous
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Load the JSON config into memory
+  await ConfigReader.initialize(env);
 
   // Hive initialization
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
 
-  await configureInjection(Environment.prod);
+  await configureInjection();
   runApp(AppWidget());
 }
