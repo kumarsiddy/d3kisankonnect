@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// TODO:: need to use abstract class
+
 enum AppColor {
   PRIMARY,
   PRIMARY_DARK,
