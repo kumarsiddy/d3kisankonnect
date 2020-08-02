@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
@@ -5,7 +6,7 @@ import 'package:injectable/injectable.dart';
 class HiveDataStorageHandler {
   static const String KEY_TOKEN = 'token';
 
-  final LazyBox _userStatusBox;
+  final LazyBox<dynamic> _userStatusBox;
 
   HiveDataStorageHandler(this._userStatusBox);
 
@@ -13,7 +14,8 @@ class HiveDataStorageHandler {
     return _userStatusBox.put(KEY_TOKEN, token);
   }
 
-  Future<String> getToken() {
-    return _userStatusBox.get(KEY_TOKEN);
+  Future<String> getToken() async {
+    var token = await _userStatusBox.get(KEY_TOKEN);
+    return cast<String>(token);
   }
 }

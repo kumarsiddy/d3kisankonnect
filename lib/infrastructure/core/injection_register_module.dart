@@ -16,5 +16,5 @@ abstract class RegisterModule {
       RetrofitApiClient(dio, baseUrl: 'http://192.168.1.11:3000');
 
   @preResolve
-  Future<LazyBox> get userStatusBox => Hive.openLazyBox(_USER_STATUS);
+  Future<LazyBox<dynamic>> get userStatusBox => Hive.openLazyBox(_USER_STATUS);
 }

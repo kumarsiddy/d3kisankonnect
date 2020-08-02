@@ -20,7 +20,8 @@ class AuthFacade implements IAuthFacade {
 
   @override
   Future<bool> isUserSignedIn() async {
-    return await _localStorageFacade.getToken() != null;
+    var token = await _localStorageFacade.getToken();
+    return token != null;
   }
 
   @override
