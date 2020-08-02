@@ -1,8 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:d3kisankonnect/application/onboarding/splash/splash_bloc.dart';
-import 'package:d3kisankonnect/presentation/core/colors.dart';
+import 'package:d3kisankonnect/presentation/core/customview/colors.dart';
 import 'package:d3kisankonnect/presentation/injection.dart';
-import 'package:d3kisankonnect/presentation/routes/router.gr.dart';
+import 'package:d3kisankonnect/presentation/routes/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,9 +17,10 @@ class AppWidget extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
-        builder: ExtendedNavigator.builder<Router>(router: Router()),
+        title: 'Sample App',
         theme: _getAppTheme(context),
+        onGenerateRoute: RouteHandler.generateRoute,
+        initialRoute: RouteID.SPLASH.name,
       ),
     );
   }

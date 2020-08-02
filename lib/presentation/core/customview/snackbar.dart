@@ -1,4 +1,4 @@
-import 'package:d3kisankonnect/presentation/core/colors.dart';
+import 'package:d3kisankonnect/presentation/core/customview/colors.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 

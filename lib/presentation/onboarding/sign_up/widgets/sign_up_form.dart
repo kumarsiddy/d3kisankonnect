@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:d3kisankonnect/application/onboarding/sign_up/sign_up_bloc.dart';
 import 'package:d3kisankonnect/domain/onboarding/value_objects.dart';
-import 'package:d3kisankonnect/presentation/core/colors.dart';
+import 'package:d3kisankonnect/presentation/core/customview/colors.dart';
 import 'package:d3kisankonnect/presentation/core/customview/button.dart';
 import 'package:d3kisankonnect/presentation/core/customview/text.dart';
-import 'package:d3kisankonnect/presentation/routes/router.gr.dart';
+import 'package:d3kisankonnect/presentation/routes/router.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +34,7 @@ class _SignUpState extends State<SignUpForm> {
             initial: (initial) {},
             signedUp: (signedUp) {
               FlushbarHelper.createError(message: "Success").show(context);
-              ExtendedNavigator.of(context).pop(Routes.signUpPage);
-              ExtendedNavigator.of(context).pushHomePage();
+              RouteHandler.navigateToOnly(context, routeID: RouteID.HOME_PAGE);
             },
             unauthenticated: (unauthenticated) {});
       },

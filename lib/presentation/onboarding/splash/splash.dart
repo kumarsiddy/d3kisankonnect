@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:d3kisankonnect/application/onboarding/splash/splash_bloc.dart';
-import 'package:d3kisankonnect/presentation/core/colors.dart';
-import 'package:d3kisankonnect/presentation/routes/router.gr.dart';
+import 'package:d3kisankonnect/presentation/core/customview/colors.dart';
+import 'package:d3kisankonnect/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,11 +13,9 @@ class SplashPage extends StatelessWidget {
         state.map(initial: (_) {
           print('initial');
         }, authenticated: (_) {
-          ExtendedNavigator.of(context).pop(Routes.splashPage);
-          ExtendedNavigator.of(context).pushHomePage();
+          RouteHandler.navigateToOnly(context, routeID: RouteID.HOME_PAGE);
         }, unaunthenticated: (_) {
-          ExtendedNavigator.of(context).pop(Routes.splashPage);
-          ExtendedNavigator.of(context).pushSignInPage();
+          RouteHandler.navigateToOnly(context, routeID: RouteID.SIGN_IN);
         });
       },
       child: _getSplashPageWidget(context),

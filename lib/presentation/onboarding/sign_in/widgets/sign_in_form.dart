@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:d3kisankonnect/application/onboarding/sign_in/sign_in_bloc.dart';
 import 'package:d3kisankonnect/domain/onboarding/value_objects.dart';
-import 'package:d3kisankonnect/presentation/core/colors.dart';
+import 'package:d3kisankonnect/presentation/core/customview/colors.dart';
 import 'package:d3kisankonnect/presentation/core/customview/button.dart';
 import 'package:d3kisankonnect/presentation/core/customview/text.dart';
-import 'package:d3kisankonnect/presentation/routes/router.gr.dart';
+import 'package:d3kisankonnect/presentation/routes/router.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +32,7 @@ class _SignInState extends State<SignInForm> {
             signedInUsingEmailAndPassword:
                 (SignedInUsingEmailAndPassword value) {
               FlushbarHelper.createError(message: "Success").show(context);
-              ExtendedNavigator.of(context).pop(Routes.signInPage);
-              ExtendedNavigator.of(context).pushHomePage();
+              RouteHandler.navigateToOnly(context, routeID: RouteID.HOME_PAGE);
             },
             unauthenticated: (Unauthenticated value) {
               FlushbarHelper.createError(message: "Unauthenticated user")
@@ -146,8 +145,7 @@ class _SignInState extends State<SignInForm> {
   }
 
   onRegister() {
-    ExtendedNavigator.of(context).pushSignUpPage();
-    ExtendedNavigator.of(context).pop(Routes.signInPage);
+    RouteHandler.navigateTo(context, routeID: RouteID.SIGN_UP);
   }
 
   onSubmit() {
