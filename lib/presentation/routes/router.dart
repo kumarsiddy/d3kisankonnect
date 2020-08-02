@@ -15,7 +15,7 @@ class RouteHandler {
     Navigator.pushNamed(
       context,
       routeID.name,
-      arguments: args,
+      arguments: args, 
     );
   }
 
