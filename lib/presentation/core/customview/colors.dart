@@ -14,18 +14,31 @@ enum AppColor {
 }
 
 extension AppColorExtension on AppColor {
-  static const colors = {
-    AppColor.PRIMARY: Color(0xff00BE82),
-    AppColor.PRIMARY_DARK: Color(0xff00BE82),
-    AppColor.ACCENT: Colors.white,
-    AppColor.WHITE: Colors.white,
-    AppColor.SNOW_WHITE: Color(0xffF2F2F2),
-    AppColor.TRANSPARENT: Colors.transparent,
-    AppColor.PRIMARY_TRANSPARENT: Color(0x8000BE82),
-    AppColor.BLACK: Colors.black,
-    AppColor.GRAY: Color(0xff808589),
-    AppColor.RED: Colors.redAccent,
-  };
+  // ignore: missing_return
+  Color get  color {
+    assert(this != null);
 
-  Color get color => colors[this];
+    switch (this) {
+      case AppColor.PRIMARY:
+        return const Color(0xff00BE82);
+      case AppColor.PRIMARY_DARK:
+        return const Color(0xff00BE82);
+      case AppColor.ACCENT:
+        return Colors.white;
+      case AppColor.WHITE:
+        return Colors.white;
+      case AppColor.SNOW_WHITE:
+        return const Color(0xffF2F2F2);
+      case AppColor.TRANSPARENT:
+        return Colors.transparent;
+      case AppColor.PRIMARY_TRANSPARENT:
+        return const Color(0x8000BE82);
+      case AppColor.BLACK:
+        return Colors.black;
+      case AppColor.RED:
+        return Colors.redAccent;
+      case AppColor.GRAY:
+        return const Color(0xff808589);
+    }
+  }
 }
