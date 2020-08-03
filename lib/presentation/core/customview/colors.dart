@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// TODO:: need to use abstract class
-
 enum AppColor {
   PRIMARY,
   PRIMARY_DARK,
@@ -16,30 +14,18 @@ enum AppColor {
 }
 
 extension AppColorExtension on AppColor {
-  Color get color {
-    switch (this) {
-      case AppColor.PRIMARY:
-        return Color(0xff00BE82);
-      case AppColor.PRIMARY_DARK:
-        return Color(0xff00BE82);
-      case AppColor.ACCENT:
-        return Colors.white;
-      case AppColor.WHITE:
-        return Colors.white;
-      case AppColor.SNOW_WHITE:
-        return Color(0xffF2F2F2);
-      case AppColor.TRANSPARENT:
-        return Colors.transparent;
-      case AppColor.PRIMARY_TRANSPARENT:
-        return Color(0x8000BE82);
-      case AppColor.BLACK:
-        return Colors.black;
-      case AppColor.RED:
-        return Colors.redAccent;
-      case AppColor.GRAY:
-        return Color(0xff808589);
-      default:
-        return null;
-    }
-  }
+  static const colors = {
+    AppColor.PRIMARY: Color(0xff00BE82),
+    AppColor.PRIMARY_DARK: Color(0xff00BE82),
+    AppColor.ACCENT: Colors.white,
+    AppColor.WHITE: Colors.white,
+    AppColor.SNOW_WHITE: Color(0xffF2F2F2),
+    AppColor.TRANSPARENT: Colors.transparent,
+    AppColor.PRIMARY_TRANSPARENT: Color(0x8000BE82),
+    AppColor.BLACK: Colors.black,
+    AppColor.GRAY: Color(0xff808589),
+    AppColor.RED: Colors.redAccent,
+  };
+
+  Color get color => colors[this];
 }
