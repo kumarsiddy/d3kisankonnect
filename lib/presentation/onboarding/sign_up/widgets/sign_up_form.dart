@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:d3kisankonnect/application/onboarding/sign_up/sign_up_bloc.dart';
 import 'package:d3kisankonnect/domain/onboarding/value_objects.dart';
 import 'package:d3kisankonnect/presentation/core/customview/colors.dart';

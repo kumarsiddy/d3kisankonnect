@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:d3kisankonnect/application/onboarding/splash/splash_bloc.dart';
 import 'package:d3kisankonnect/presentation/core/customview/colors.dart';
 import 'package:d3kisankonnect/presentation/routes/router.dart';
