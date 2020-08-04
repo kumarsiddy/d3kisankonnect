@@ -1,3 +1,4 @@
+import 'package:d3kisankonnect/presentation/core/language/language_page.dart';
 import 'package:d3kisankonnect/presentation/onboarding/home/home_page.dart';
 import 'package:d3kisankonnect/presentation/onboarding/sign_in/sign_in_page.dart';
 import 'package:d3kisankonnect/presentation/onboarding/sign_up/sign_up_page.dart';
@@ -15,7 +16,7 @@ class RouteHandler {
     Navigator.pushNamed(
       context,
       routeID.name,
-      arguments: args, 
+      arguments: args,
     );
   }
 
@@ -59,6 +60,8 @@ class RouteHandler {
     switch (routeID) {
       case RouteID.SPLASH:
         return _buildRoute(routeSettings, SplashPage());
+      case RouteID.LANGUAGE:
+        return _buildRoute(routeSettings, LanguagePage());
       case RouteID.SIGN_IN:
         return _buildRoute(routeSettings, SignInPage());
       case RouteID.SIGN_UP:
@@ -97,6 +100,7 @@ class RouteHandler {
 
 enum RouteID {
   SPLASH,
+  LANGUAGE,
   SIGN_IN,
   SIGN_UP,
   HOME_PAGE,

@@ -1,5 +1,5 @@
 import 'package:d3kisankonnect/application/onboarding/sign_in/sign_in_bloc.dart';
-import 'package:d3kisankonnect/injection.dart';
+import 'package:d3kisankonnect/di/injection.dart';
 import 'package:d3kisankonnect/presentation/onboarding/sign_in/widgets/sign_in_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
