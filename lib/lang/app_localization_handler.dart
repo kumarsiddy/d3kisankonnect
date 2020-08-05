@@ -1,4 +1,3 @@
-import 'package:d3kisankonnect/di/injection.dart';
 import 'package:d3kisankonnect/lang/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';

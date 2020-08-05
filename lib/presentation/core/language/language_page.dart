@@ -32,12 +32,12 @@ class _LanguageForm extends StatelessWidget {
               CustomButton(
                   getString(context, AppStrings.english),
                   () => _onLanguageSelected(
-                      AppLocalizations.getLocaleOf(AppStrings.english))),
+                      AppLocalizations.getLocaleOf(AppLocalizations.ENGLISH))),
               SizedBox(width: 12),
               CustomButton(
                   getString(context, AppStrings.hindi),
                   () => _onLanguageSelected(
-                      AppLocalizations.getLocaleOf(AppStrings.hindi))),
+                      AppLocalizations.getLocaleOf(AppLocalizations.HINDI))),
             ],
           ),
         ],

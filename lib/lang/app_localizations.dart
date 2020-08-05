@@ -8,6 +8,9 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class AppLocalizations {
+  static const String ENGLISH = 'english';
+  static const String HINDI = 'hindi';
+
   static const supportedLanguageMap = <String, Locale>{
     AppStrings.english: Locale('en', 'US'),
     AppStrings.hindi: Locale('hi', 'IN'),
@@ -17,13 +20,17 @@ class AppLocalizations {
     return supportedLanguageMap[key];
   }
 
+  static Locale getDefaultLocale() {
+    return supportedLanguageMap[AppStrings.english];
+  }
+
   static List<Locale> getSupportedLanguages() {
-    var supporedLanguages = <Locale>[];
+    var supportedLanguages = <Locale>[];
 
     supportedLanguageMap
-        .forEach((key, locale) => supporedLanguages.add(locale));
+        .forEach((key, locale) => supportedLanguages.add(locale));
 
-    return supporedLanguages;
+    return supportedLanguages;
   }
 
   static Iterable<LocalizationsDelegate> getLocalizationDelegates() {
@@ -42,7 +49,7 @@ class AppLocalizations {
         return supportedLocale;
       }
     }
-    return supportedLocales.first;
+    return getDefaultLocale();
   }
 
   static AppLocalizations of(BuildContext context) {
@@ -56,11 +63,7 @@ class AppLocalizations {
   Map<String, String> _localizedStrings;
 
   Future<bool> load(Locale locale) async {
-    var result = await authFacade.getLocaleJsonString(locale);
-// Need to handle this error
-    result.fold((l) => {print('error from app localization')}, (r) {
-      _localizedStrings = r;
-    });
+    _localizedStrings = await authFacade.getLocaleJsonString(locale);
 
     return true;
   }

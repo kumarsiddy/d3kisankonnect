@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
 import 'package:d3kisankonnect/domain/onboarding/auth_failure.dart';
 import 'package:d3kisankonnect/domain/onboarding/i_auth_facade.dart';
 import 'package:d3kisankonnect/infrastructure/core/api_service/retrofit_api_client.dart';
+import 'package:d3kisankonnect/infrastructure/core/local_storage/cache_handler/lang_cache_handler.dart';
 import 'package:d3kisankonnect/infrastructure/core/local_storage/i_local_storage_facade.dart';
 import 'package:d3kisankonnect/infrastructure/onboarding/dtos/onboarding_dtos.dart';
 import 'package:dartz/dartz.dart';
@@ -15,10 +17,12 @@ import 'package:injectable/injectable.dart';
 class AuthFacade implements IAuthFacade {
   final RetrofitApiClient _retrofitApiClient;
   final ILocalStorageFacade _localStorageFacade;
+  final LanguageCacheHandler _languageCacheHandler;
 
   AuthFacade(
     this._retrofitApiClient,
     this._localStorageFacade,
+    this._languageCacheHandler,
   );
 
   @override
@@ -81,20 +85,28 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Map<String, String>>> getLocaleJsonString(
-      Locale locale) async {
-    var http = await _retrofitApiClient.getLocaleJson(locale.languageCode);
+  Future<Map<String, String>> getLocaleJsonString(Locale locale) async {
+    var languageMap = await _languageCacheHandler.readJsonFor(locale: locale);
 
-    Map<String, String> translationData = {};
+    if (languageMap.isNone()) {
+      var http = await _retrofitApiClient.getLocaleJson(locale.languageCode);
+      Map<String, String> translationData = {};
 
-    if (http.response.statusCode == HttpStatus.ok) {
-      var data = Map<String, dynamic>.from(http.data);
-      data.forEach((key, value) {
-        translationData.putIfAbsent(key, () => value.toString());
-      });
-      return right(translationData);
+      if (http.response.statusCode == HttpStatus.ok) {
+        var data = Map<String, dynamic>.from(http.data);
+        data.forEach((key, value) {
+          translationData.putIfAbsent(key, () => value.toString());
+        });
+        await _languageCacheHandler.writeJsonFor(
+            locale: locale, toBeWritten: json.encode(data));
+
+        return translationData;
+      }
+    } else if (languageMap.isSome()) {
+      return languageMap.getOrElse(() => {});
     }
 
-    return left(AuthFailure.serverError());
+// Returning default language json from asset folder if everything fails
+    return await _languageCacheHandler.getDefaultLocaleJson();
   }
 }

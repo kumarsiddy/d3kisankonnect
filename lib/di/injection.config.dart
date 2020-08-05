@@ -15,6 +15,7 @@ import '../infrastructure/onboarding/onboarding_facade.dart';
 import '../infrastructure/core/local_storage/hive/hive_data_storage_handler.dart';
 import '../domain/onboarding/i_auth_facade.dart';
 import '../infrastructure/core/local_storage/i_local_storage_facade.dart';
+import '../infrastructure/core/local_storage/cache_handler/lang_cache_handler.dart';
 import '../infrastructure/core/local_storage/local_storage_handler_facade.dart';
 import '../infrastructure/core/injection_register_module.dart';
 import '../infrastructure/core/api_service/retrofit_api_client.dart';
@@ -39,13 +40,17 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
 
   // Eager singletons must be registered in the right order
   gh.singleton<Dio>(registerModule.dio);
+  gh.singleton<LanguageCacheHandler>(LanguageCacheHandler());
   gh.singleton<RetrofitApiClient>(registerModule.retrofitClient);
   gh.singleton<HiveDataStorageHandler>(
       HiveDataStorageHandler(g<LazyBox<dynamic>>()));
   gh.singleton<ILocalStorageFacade>(
       LocalStorageHandlerFacade(g<HiveDataStorageHandler>()));
-  gh.singleton<IAuthFacade>(
-      AuthFacade(g<RetrofitApiClient>(), g<ILocalStorageFacade>()));
+  gh.singleton<IAuthFacade>(AuthFacade(
+    g<RetrofitApiClient>(),
+    g<ILocalStorageFacade>(),
+    g<LanguageCacheHandler>(),
+  ));
 }
 
 class _$RegisterModule extends RegisterModule {}
