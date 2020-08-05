@@ -12,8 +12,6 @@ class AppLocalizations {
     AppStrings.hindi: Locale('hi', 'IN'),
   };
 
-  final Locale locale;
-
   static const LocalizationsDelegate<AppLocalizations> delegate =
       AppLocalizationsDelegate();
 
@@ -51,11 +49,13 @@ class AppLocalizations {
     return supportedLocales.first;
   }
 
-  AppLocalizations(this.locale);
-
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
+
+  final Locale locale;
+
+  AppLocalizations(this.locale);
 
   Map<String, String> _localizedStrings;
 
