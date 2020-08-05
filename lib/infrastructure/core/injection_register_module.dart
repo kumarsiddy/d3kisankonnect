@@ -1,6 +1,8 @@
 import 'package:d3kisankonnect/config_reader.dart';
 import 'package:d3kisankonnect/infrastructure/core/api_service/retrofit_api_client.dart';
+import 'package:d3kisankonnect/lang/app_localizations.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,4 +20,5 @@ abstract class RegisterModule {
 
   @preResolve
   Future<LazyBox<dynamic>> get userStatusBox => Hive.openLazyBox(_USER_STATUS);
+  
 }

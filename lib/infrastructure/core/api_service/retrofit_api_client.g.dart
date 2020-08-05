@@ -50,4 +50,23 @@ class _RetrofitApiClient implements RetrofitApiClient {
     final value = SignUpResponseDto.fromJson(_result.data);
     return value;
   }
+
+  @override
+  getLocaleJson(locale) async {
+    ArgumentError.checkNotNull(locale, 'locale');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final Response _result = await _dio.request('/getlocalejson/$locale',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
 }

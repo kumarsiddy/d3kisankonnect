@@ -1,19 +1,17 @@
-import 'dart:convert';
-
-import 'package:d3kisankonnect/lang/localizations_delegate.dart';
+import 'package:d3kisankonnect/di/injection.dart';
+import 'package:d3kisankonnect/domain/onboarding/i_auth_facade.dart';
+import 'package:d3kisankonnect/lang/app_localizations_delegate.dart';
 import 'package:d3kisankonnect/presentation/core/language/app_strings.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class AppLocalizations {
   static const supportedLanguageMap = <String, Locale>{
     AppStrings.english: Locale('en', 'US'),
     AppStrings.hindi: Locale('hi', 'IN'),
   };
-
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      AppLocalizationsDelegate();
 
   static Locale getLocaleOf(String key) {
     return supportedLanguageMap[key];
@@ -30,7 +28,7 @@ class AppLocalizations {
 
   static Iterable<LocalizationsDelegate> getLocalizationDelegates() {
     return [
-      AppLocalizations.delegate,
+      getIt<AppLocalizationsDelegate>(),
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
     ];
@@ -44,8 +42,6 @@ class AppLocalizations {
         return supportedLocale;
       }
     }
-    // If the locale of the device is not supported, use the first one
-    // from the list (English, in this case).
     return supportedLocales.first;
   }
 
@@ -53,19 +49,17 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  final Locale locale;
+  IAuthFacade authFacade;
 
-  AppLocalizations(this.locale);
+  AppLocalizations(this.authFacade);
 
   Map<String, String> _localizedStrings;
 
-  Future<bool> load() async {
-    String jsonString =
-        await rootBundle.loadString('lang/${locale.languageCode}.json');
-    Map<String, dynamic> jsonMap = json.decode(jsonString);
-
-    _localizedStrings = jsonMap.map((key, value) {
-      return MapEntry(key, value.toString());
+  Future<bool> load(Locale locale) async {
+    var result = await authFacade.getLocaleJsonString(locale);
+// Need to handle this error
+    result.fold((l) => {print('error from app localization')}, (r) {
+      _localizedStrings = r;
     });
 
     return true;

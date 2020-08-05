@@ -9,6 +9,8 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/get_it_helper.dart';
 import 'package:hive/hive.dart';
 
+import '../lang/app_localizations.dart';
+import '../lang/app_localizations_delegate.dart';
 import '../infrastructure/onboarding/onboarding_facade.dart';
 import '../infrastructure/core/local_storage/hive/hive_data_storage_handler.dart';
 import '../domain/onboarding/i_auth_facade.dart';
@@ -31,6 +33,9 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<SignInBloc>(() => SignInBloc(g<IAuthFacade>()));
   gh.factory<SignUpBloc>(() => SignUpBloc(g<IAuthFacade>()));
   gh.factory<SplashBloc>(() => SplashBloc(g<IAuthFacade>()));
+  gh.factory<AppLocalizations>(() => AppLocalizations(g<IAuthFacade>()));
+  gh.factory<AppLocalizationsDelegate>(
+      () => AppLocalizationsDelegate(g<AppLocalizations>()));
 
   // Eager singletons must be registered in the right order
   gh.singleton<Dio>(registerModule.dio);

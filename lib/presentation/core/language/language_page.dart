@@ -1,5 +1,5 @@
 import 'package:d3kisankonnect/lang/app_localizations.dart';
-import 'package:d3kisankonnect/lang/localization_handler.dart';
+import 'package:d3kisankonnect/lang/app_localization_handler.dart';
 import 'package:d3kisankonnect/presentation/core/customview/button.dart';
 import 'package:d3kisankonnect/presentation/core/language/app_strings.dart';
 import 'package:flutter/material.dart';
