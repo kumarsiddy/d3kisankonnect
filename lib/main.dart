@@ -17,5 +17,5 @@ Future<void> mainCommon(String env) async {
   Hive.init(appDocumentDir.path);
 
   await configureInjection();
-  runApp(NewSplashPage());
+  runApp(Splash());
 }
