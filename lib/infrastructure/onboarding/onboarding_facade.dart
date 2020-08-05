@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:d3kisankonnect/domain/onboarding/auth_failure.dart';
@@ -82,12 +83,12 @@ class AuthFacade implements IAuthFacade {
   @override
   Future<Either<AuthFailure, Map<String, String>>> getLocaleJsonString(
       Locale locale) async {
-    var result = await _retrofitApiClient.getLocaleJson(locale.languageCode);
+    var http = await _retrofitApiClient.getLocaleJson(locale.languageCode);
 
     Map<String, String> translationData = {};
 
-    if (result != null) {
-      var data = Map<String, dynamic>.from(result.data);
+    if (http.response.statusCode == HttpStatus.ok) {
+      var data = Map<String, dynamic>.from(http.data);
       data.forEach((key, value) {
         translationData.putIfAbsent(key, () => value.toString());
       });
