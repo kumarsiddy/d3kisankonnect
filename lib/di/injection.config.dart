@@ -9,6 +9,8 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/get_it_helper.dart';
 import 'package:hive/hive.dart';
 
+import '../lang/app_localizations.dart';
+import '../lang/app_localizations_delegate.dart';
 import '../infrastructure/onboarding/onboarding_facade.dart';
 import '../infrastructure/core/local_storage/hive/hive_data_storage_handler.dart';
 import '../domain/onboarding/i_auth_facade.dart';
@@ -26,6 +28,9 @@ import '../application/onboarding/splash/splash_bloc.dart';
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final gh = GetItHelper(g, environment);
   final registerModule = _$RegisterModule();
+  gh.factory<AppLocalizations>(() => AppLocalizations());
+  gh.factory<AppLocalizationsDelegate>(
+      () => AppLocalizationsDelegate(g<AppLocalizations>()));
   final lazyBox = await registerModule.userStatusBox;
   gh.factory<LazyBox<dynamic>>(() => lazyBox);
   gh.factory<SignInBloc>(() => SignInBloc(g<IAuthFacade>()));

@@ -1,19 +1,22 @@
 import 'dart:convert';
 
-import 'package:d3kisankonnect/lang/localizations_delegate.dart';
+import 'package:d3kisankonnect/di/injection.dart';
+import 'package:d3kisankonnect/lang/app_localizations_delegate.dart';
 import 'package:d3kisankonnect/presentation/core/language/app_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class AppLocalizations {
   static const supportedLanguageMap = <String, Locale>{
     AppStrings.english: Locale('en', 'US'),
     AppStrings.hindi: Locale('hi', 'IN'),
   };
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      AppLocalizationsDelegate();
+  // static const LocalizationsDelegate<AppLocalizations> delegate =
+  //     AppLocalizationsDelegate();
 
   static Locale getLocaleOf(String key) {
     return supportedLanguageMap[key];
@@ -30,7 +33,7 @@ class AppLocalizations {
 
   static Iterable<LocalizationsDelegate> getLocalizationDelegates() {
     return [
-      AppLocalizations.delegate,
+      getIt<AppLocalizationsDelegate>(),
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
     ];
@@ -49,17 +52,13 @@ class AppLocalizations {
     return supportedLocales.first;
   }
 
-  static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
-  }
-
-  final Locale locale;
-
-  AppLocalizations(this.locale);
+  // static AppLocalizations of(BuildContext context) {
+  //   return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  // }
 
   Map<String, String> _localizedStrings;
 
-  Future<bool> load() async {
+  Future<bool> load(Locale locale) async {
     String jsonString =
         await rootBundle.loadString('lang/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);

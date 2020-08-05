@@ -1,6 +1,6 @@
 import 'package:d3kisankonnect/application/onboarding/splash/splash_bloc.dart';
 import 'package:d3kisankonnect/lang/app_localizations.dart';
-import 'package:d3kisankonnect/lang/localization_handler.dart';
+import 'package:d3kisankonnect/lang/app_localization_handler.dart';
 import 'package:d3kisankonnect/presentation/core/customview/colors.dart';
 import 'package:d3kisankonnect/di/injection.dart';
 import 'package:d3kisankonnect/presentation/core/language/app_strings.dart';
@@ -49,7 +49,7 @@ class Splash extends StatelessWidget {
       RouteHandler.navigateToOnly(context, routeID: RouteID.LANGUAGE);
     }, unaunthenticated: (_) {
       print('unauthenticated');
-      RouteHandler.navigateToOnly(context, routeID: RouteID.SIGN_IN);
+      RouteHandler.navigateToOnly(context, routeID: RouteID.LANGUAGE);
     });
   }
 }
