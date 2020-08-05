@@ -20,10 +20,8 @@ class _AppLocalizationHandler {
 String getString(BuildContext context, String key) {
   assert(key != null);
 
-  // AppLocalizations appLocalizations =
-  //     getIt.get(instanceName: 'getAppLocalizations', param1: context);
-  // return appLocalizations.translate(key);
-  return 'sid';
+  AppLocalizations appLocalizations = AppLocalizations.of(context);
+  return appLocalizations.translate(key);
 }
 
 // This is to maintain single object throughout the app lifecycle.

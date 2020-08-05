@@ -15,9 +15,6 @@ class AppLocalizations {
     AppStrings.hindi: Locale('hi', 'IN'),
   };
 
-  // static const LocalizationsDelegate<AppLocalizations> delegate =
-  //     AppLocalizationsDelegate();
-
   static Locale getLocaleOf(String key) {
     return supportedLanguageMap[key];
   }
@@ -47,14 +44,12 @@ class AppLocalizations {
         return supportedLocale;
       }
     }
-    // If the locale of the device is not supported, use the first one
-    // from the list (English, in this case).
     return supportedLocales.first;
   }
 
-  // static AppLocalizations of(BuildContext context) {
-  //   return Localizations.of<AppLocalizations>(context, AppLocalizations);
-  // }
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  }
 
   Map<String, String> _localizedStrings;
 
