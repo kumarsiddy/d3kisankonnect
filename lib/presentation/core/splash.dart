@@ -1,27 +1,89 @@
 import 'package:d3kisankonnect/application/onboarding/splash/splash_bloc.dart';
+import 'package:d3kisankonnect/lang/app_localizations.dart';
+import 'package:d3kisankonnect/lang/localization_handler.dart';
 import 'package:d3kisankonnect/presentation/core/customview/colors.dart';
+import 'package:d3kisankonnect/di/injection.dart';
+import 'package:d3kisankonnect/presentation/core/language/app_strings.dart';
 import 'package:d3kisankonnect/presentation/routes/router.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-class SplashPage extends StatelessWidget {
+class NewSplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SplashBloc, SplashState>(
-      listener: (BuildContext context, SplashState state) {
-        state.map(initial: (_) {
-          print('initial');
-        }, authenticated: (_) {
-          RouteHandler.navigateToOnly(context, routeID: RouteID.HOME_PAGE);
-        }, unaunthenticated: (_) {
-          RouteHandler.navigateToOnly(context, routeID: RouteID.SIGN_IN);
-        });
-      },
-      child: _getSplashPageWidget(context),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              getIt<SplashBloc>()..add(const SplashEvent.authCheckRequested()),
+        )
+      ],
+      child: StreamBuilder<Locale>(
+          stream: localeHandler.localeStream,
+          initialData: AppLocalizations.getLocaleOf(AppStrings.english),
+          builder: (context, snapshot) {
+            return MaterialApp(
+              title: 'Sample App',
+              theme: _getAppTheme(context),
+              onGenerateRoute: RouteHandler.generateRoute,
+              locale: snapshot.data,
+              supportedLocales: AppLocalizations.getSupportedLanguages(),
+              localizationsDelegates:
+                  AppLocalizations.getLocalizationDelegates(),
+              localeResolutionCallback: _getResolutionCallback,
+              home: BlocListener<SplashBloc, SplashState>(
+                listener: _handleState,
+                child: _SplashPageForm(),
+              ),
+            );
+          }),
     );
   }
 
-  Widget _getSplashPageWidget(BuildContext context) {
+  Locale _getResolutionCallback(
+      Locale locale, Iterable<Locale> supportedLocales) {
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode &&
+          supportedLocale.countryCode == locale.countryCode) {
+        return supportedLocale;
+      }
+    }
+    // If the locale of the device is not supported, use the first one
+    // from the list (English, in this case).
+    return supportedLocales.first;
+  }
+
+  void _handleState(BuildContext context, SplashState state) {
+    state.map(initial: (_) {
+      print('initial');
+    }, authenticated: (_) {
+      print('authenticated');
+      RouteHandler.navigateToOnly(context, routeID: RouteID.HOME_PAGE);
+    }, unaunthenticated: (_) {
+      print('unauthenticated');
+      RouteHandler.navigateToOnly(context, routeID: RouteID.SIGN_IN);
+    });
+  }
+}
+
+_getAppTheme(BuildContext context) {
+  return ThemeData(
+    primaryColor: AppColor.PRIMARY.color,
+    primaryColorDark: AppColor.PRIMARY_DARK.color,
+    accentColor: AppColor.ACCENT.color,
+    primaryIconTheme:
+        Theme.of(context).accentIconTheme.copyWith(color: AppColor.WHITE.color),
+    accentIconTheme:
+        Theme.of(context).accentIconTheme.copyWith(color: AppColor.WHITE.color),
+    primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
+  );
+}
+
+class _SplashPageForm extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         color: AppColor.PRIMARY.color,
