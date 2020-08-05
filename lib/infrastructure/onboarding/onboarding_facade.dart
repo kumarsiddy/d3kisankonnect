@@ -88,7 +88,7 @@ class AuthFacade implements IAuthFacade {
   Future<Map<String, String>> getLocaleJsonString(Locale locale) async {
     var languageMap = await _languageCacheHandler.readJsonFor(locale: locale);
 
-    languageMap.fold(() async {
+    if (languageMap.isNone()) {
       var http = await _retrofitApiClient.getLocaleJson(locale.languageCode);
       Map<String, String> translationData = {};
 
@@ -102,11 +102,9 @@ class AuthFacade implements IAuthFacade {
 
         return translationData;
       }
-
-      return await _languageCacheHandler.getDefaultLocaleJson();
-    }, (jsonMap) {
-      return jsonMap;
-    });
+    } else if (languageMap.isSome()) {
+      return languageMap.getOrElse(() => {});
+    }
 
 // Returning default language json from asset folder if everything fails
     return await _languageCacheHandler.getDefaultLocaleJson();
