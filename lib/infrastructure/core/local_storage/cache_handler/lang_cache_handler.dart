@@ -18,7 +18,9 @@ class LanguageCacheHandler {
 
   Future<File> _getLanguageFileWith({@required String filename}) async {
     final path = await _localPath;
-    return File('$path/$filename');
+    File file = File('$path/$filename');
+    await file.create(recursive: true);
+    return file;
   }
 
   Future<File> writeJsonFor({
@@ -27,7 +29,7 @@ class LanguageCacheHandler {
   }) async {
     String filename = _getFileNameFromLocale(locale);
     final file = await _getLanguageFileWith(filename: filename);
-    return file.writeAsString(toBeWritten);
+    return await file.writeAsString(toBeWritten);
   }
 
 // this method will try to find the corresponding json file for given locale
