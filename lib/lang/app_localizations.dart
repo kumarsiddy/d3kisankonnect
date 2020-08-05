@@ -38,6 +38,19 @@ class AppLocalizations {
     ];
   }
 
+  static Locale getResolutionCallback(
+      Locale locale, Iterable<Locale> supportedLocales) {
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode &&
+          supportedLocale.countryCode == locale.countryCode) {
+        return supportedLocale;
+      }
+    }
+    // If the locale of the device is not supported, use the first one
+    // from the list (English, in this case).
+    return supportedLocales.first;
+  }
+
   AppLocalizations(this.locale);
 
   static AppLocalizations of(BuildContext context) {

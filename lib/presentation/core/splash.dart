@@ -8,7 +8,6 @@ import 'package:d3kisankonnect/presentation/routes/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class NewSplashPage extends StatelessWidget {
   @override
@@ -32,7 +31,7 @@ class NewSplashPage extends StatelessWidget {
               supportedLocales: AppLocalizations.getSupportedLanguages(),
               localizationsDelegates:
                   AppLocalizations.getLocalizationDelegates(),
-              localeResolutionCallback: _getResolutionCallback,
+              localeResolutionCallback: AppLocalizations.getResolutionCallback,
               home: BlocListener<SplashBloc, SplashState>(
                 listener: _handleState,
                 child: _SplashPageForm(),
@@ -42,25 +41,12 @@ class NewSplashPage extends StatelessWidget {
     );
   }
 
-  Locale _getResolutionCallback(
-      Locale locale, Iterable<Locale> supportedLocales) {
-    for (var supportedLocale in supportedLocales) {
-      if (supportedLocale.languageCode == locale.languageCode &&
-          supportedLocale.countryCode == locale.countryCode) {
-        return supportedLocale;
-      }
-    }
-    // If the locale of the device is not supported, use the first one
-    // from the list (English, in this case).
-    return supportedLocales.first;
-  }
-
   void _handleState(BuildContext context, SplashState state) {
     state.map(initial: (_) {
       print('initial');
     }, authenticated: (_) {
       print('authenticated');
-      RouteHandler.navigateToOnly(context, routeID: RouteID.HOME_PAGE);
+      RouteHandler.navigateToOnly(context, routeID: RouteID.LANGUAGE);
     }, unaunthenticated: (_) {
       print('unauthenticated');
       RouteHandler.navigateToOnly(context, routeID: RouteID.SIGN_IN);
