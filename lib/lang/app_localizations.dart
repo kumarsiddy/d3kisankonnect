@@ -4,6 +4,7 @@ import 'package:d3kisankonnect/lang/localizations_delegate.dart';
 import 'package:d3kisankonnect/presentation/core/language/app_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class AppLocalizations {
   static const supportedLanguageMap = <String, Locale>{
@@ -27,6 +28,14 @@ class AppLocalizations {
         .forEach((key, locale) => supporedLanguages.add(locale));
 
     return supporedLanguages;
+  }
+
+  static Iterable<LocalizationsDelegate> getLocalizationDelegates() {
+    return [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ];
   }
 
   AppLocalizations(this.locale);

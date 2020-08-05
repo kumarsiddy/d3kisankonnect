@@ -2,7 +2,6 @@ import 'package:d3kisankonnect/presentation/core/language/language_page.dart';
 import 'package:d3kisankonnect/presentation/onboarding/home/home_page.dart';
 import 'package:d3kisankonnect/presentation/onboarding/sign_in/sign_in_page.dart';
 import 'package:d3kisankonnect/presentation/onboarding/sign_up/sign_up_page.dart';
-import 'package:d3kisankonnect/presentation/onboarding/splash/splash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -58,8 +57,6 @@ class RouteHandler {
   static Route generateRoute(RouteSettings routeSettings) {
     final routeID = parseRouteFrom(routeSettings.name) ?? RouteID.NO_ROUTE;
     switch (routeID) {
-      case RouteID.SPLASH:
-        return _buildRoute(routeSettings, SplashPage());
       case RouteID.LANGUAGE:
         return _buildRoute(routeSettings, LanguagePage());
       case RouteID.SIGN_IN:
@@ -99,7 +96,6 @@ class RouteHandler {
 }
 
 enum RouteID {
-  SPLASH,
   LANGUAGE,
   SIGN_IN,
   SIGN_UP,

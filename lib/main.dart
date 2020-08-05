@@ -1,5 +1,5 @@
 import 'package:d3kisankonnect/config_reader.dart';
-import 'package:d3kisankonnect/presentation/core/app_widget.dart';
+import 'package:d3kisankonnect/presentation/core/splash.dart';
 import 'package:d3kisankonnect/di/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -17,5 +17,5 @@ Future<void> mainCommon(String env) async {
   Hive.init(appDocumentDir.path);
 
   await configureInjection();
-  runApp(AppWidget());
+  runApp(NewSplashPage());
 }
