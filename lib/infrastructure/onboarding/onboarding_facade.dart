@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:d3kisankonnect/domain/onboarding/auth_failure.dart';
 import 'package:d3kisankonnect/domain/onboarding/i_auth_facade.dart';
 import 'package:d3kisankonnect/infrastructure/core/api_service/retrofit_api_client.dart';
@@ -72,6 +74,24 @@ class AuthFacade implements IAuthFacade {
 
     if (isSuccess) {
       return right(true);
+    }
+
+    return left(AuthFailure.serverError());
+  }
+
+  @override
+  Future<Either<AuthFailure, Map<String, String>>> getLocaleJsonString(
+      Locale locale) async {
+    var result = await _retrofitApiClient.getLocaleJson(locale.languageCode);
+
+    Map<String, String> translationData = {};
+
+    if (result != null) {
+      var data = Map<String, dynamic>.from(result.data);
+      data.forEach((key, value) {
+        translationData.putIfAbsent(key, () => value.toString());
+      });
+      return right(translationData);
     }
 
     return left(AuthFailure.serverError());

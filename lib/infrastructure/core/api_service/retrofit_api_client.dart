@@ -13,4 +13,7 @@ abstract class RetrofitApiClient {
 
   @POST('/signup')
   Future<SignUpResponseDto> signUp(@Body() SignUpDto signUpDto);
+
+  @GET('/getlocalejson/{locale}')
+  Future<HttpResponse> getLocaleJson(@Path('locale') String locale);
 }

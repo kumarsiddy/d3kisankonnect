@@ -28,14 +28,14 @@ import '../application/onboarding/splash/splash_bloc.dart';
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final gh = GetItHelper(g, environment);
   final registerModule = _$RegisterModule();
-  gh.factory<AppLocalizations>(() => AppLocalizations());
-  gh.factory<AppLocalizationsDelegate>(
-      () => AppLocalizationsDelegate(g<AppLocalizations>()));
   final lazyBox = await registerModule.userStatusBox;
   gh.factory<LazyBox<dynamic>>(() => lazyBox);
   gh.factory<SignInBloc>(() => SignInBloc(g<IAuthFacade>()));
   gh.factory<SignUpBloc>(() => SignUpBloc(g<IAuthFacade>()));
   gh.factory<SplashBloc>(() => SplashBloc(g<IAuthFacade>()));
+  gh.factory<AppLocalizations>(() => AppLocalizations(g<IAuthFacade>()));
+  gh.factory<AppLocalizationsDelegate>(
+      () => AppLocalizationsDelegate(g<AppLocalizations>()));
 
   // Eager singletons must be registered in the right order
   gh.singleton<Dio>(registerModule.dio);

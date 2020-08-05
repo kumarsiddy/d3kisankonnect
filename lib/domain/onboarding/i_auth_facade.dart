@@ -20,4 +20,6 @@ abstract class IAuthFacade {
   });
 
   Future<void> signOut();
+
+  Future<Either<AuthFailure,  Map<String, String>>> getLocaleJsonString(Locale locale);
 }
