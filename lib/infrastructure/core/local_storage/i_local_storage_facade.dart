@@ -7,5 +7,8 @@ abstract class ILocalStorageFacade {
 
   Future<bool> deleteCache();
 
-  Future<Map<String, String>> getDefaultTranslation(Locale locale);
+
+  Future<void> saveLocale(Locale locale);
+
+  Future<Locale> getLocale();
 }

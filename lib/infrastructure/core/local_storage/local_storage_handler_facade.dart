@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:d3kisankonnect/infrastructure/core/local_storage/hive/hive_data_storage_handler.dart';
 import 'package:d3kisankonnect/infrastructure/core/local_storage/i_local_storage_facade.dart';
+import 'package:d3kisankonnect/lang/app_localizations.dart';
+import 'package:d3kisankonnect/logger.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
 @Singleton(as: ILocalStorageFacade)
@@ -26,13 +25,20 @@ class LocalStorageHandlerFacade implements ILocalStorageFacade {
   Future<bool> deleteCache() async {}
 
   @override
-  Future<Map<String, String>> getDefaultTranslation(Locale locale) async {
-    String jsonString =
-        await rootBundle.loadString('lang/${locale.languageCode}.json');
-    Map<String, dynamic> jsonMap = json.decode(jsonString);
+  Future<Locale> getLocale() async {
+    String localeKey = await _hiveDataStorageHandler.getLocaleKey();
+    if (localeKey == null) {
+      return AppLocalizations.getDefaultLocale();
+    }
+    return AppLocalizations.getLocaleOf(localeKey);
+  }
 
-    return jsonMap.map((key, value) {
-      return MapEntry(key, value.toString());
-    });
+  @override
+  Future<void> saveLocale(Locale locale) async {
+    var localeOption = AppLocalizations.getKeyFromLocale(locale);
+    localeOption.fold(
+      () => new Exception('locale not found'),
+      (localeKey) => _hiveDataStorageHandler.saveLocaleKey(localeKey),
+    );
   }
 }

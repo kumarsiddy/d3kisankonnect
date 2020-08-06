@@ -3,7 +3,6 @@ import 'package:d3kisankonnect/lang/app_localizations.dart';
 import 'package:d3kisankonnect/lang/app_localization_handler.dart';
 import 'package:d3kisankonnect/presentation/core/customview/colors.dart';
 import 'package:d3kisankonnect/di/injection.dart';
-import 'package:d3kisankonnect/presentation/core/language/app_strings.dart';
 import 'package:d3kisankonnect/presentation/routes/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +14,16 @@ class Splash extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>
-              getIt<SplashBloc>()..add(const SplashEvent.authCheckRequested()),
+          create: (context) {
+            SplashBloc splashBloc = getIt<SplashBloc>();
+            splashBloc.add(const SplashEvent.authCheckRequested());
+            splashBloc.add(const SplashEvent.getSavedLanguageRequested());
+            return splashBloc;
+          },
         )
       ],
       child: StreamBuilder<Locale>(
-          stream: localeHandler.localeStream,
-          initialData: AppLocalizations.getLocaleOf(AppStrings.english),
+          stream: appLocaleHandler.localeStream,
           builder: (context, snapshot) {
             return MaterialApp(
               title: 'Sample App',

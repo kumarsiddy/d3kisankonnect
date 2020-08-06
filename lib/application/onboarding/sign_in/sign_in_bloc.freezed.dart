@@ -20,42 +20,47 @@ class _$SignInEventTearOff {
       password: password,
     );
   }
+
+// ignore: unused_element
+  OnLanguageChange onLanguageChange({@required Locale locale}) {
+    return OnLanguageChange(
+      locale: locale,
+    );
+  }
 }
 
 // ignore: unused_element
 const $SignInEvent = _$SignInEventTearOff();
 
 mixin _$SignInEvent {
-  EmailAddress get emailAddress;
-  Password get password;
-
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result onSignIn(EmailAddress emailAddress, Password password),
+    @required Result onLanguageChange(Locale locale),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result onSignIn(EmailAddress emailAddress, Password password),
+    Result onLanguageChange(Locale locale),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result onSignIn(OnSignIn value),
+    @required Result onLanguageChange(OnLanguageChange value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result onSignIn(OnSignIn value),
+    Result onLanguageChange(OnLanguageChange value),
     @required Result orElse(),
   });
-
-  $SignInEventCopyWith<SignInEvent> get copyWith;
 }
 
 abstract class $SignInEventCopyWith<$Res> {
   factory $SignInEventCopyWith(
           SignInEvent value, $Res Function(SignInEvent) then) =
       _$SignInEventCopyWithImpl<$Res>;
-  $Res call({EmailAddress emailAddress, Password password});
 }
 
 class _$SignInEventCopyWithImpl<$Res> implements $SignInEventCopyWith<$Res> {
@@ -64,25 +69,11 @@ class _$SignInEventCopyWithImpl<$Res> implements $SignInEventCopyWith<$Res> {
   final SignInEvent _value;
   // ignore: unused_field
   final $Res Function(SignInEvent) _then;
-
-  @override
-  $Res call({
-    Object emailAddress = freezed,
-    Object password = freezed,
-  }) {
-    return _then(_value.copyWith(
-      emailAddress: emailAddress == freezed
-          ? _value.emailAddress
-          : emailAddress as EmailAddress,
-      password: password == freezed ? _value.password : password as Password,
-    ));
-  }
 }
 
-abstract class $OnSignInCopyWith<$Res> implements $SignInEventCopyWith<$Res> {
+abstract class $OnSignInCopyWith<$Res> {
   factory $OnSignInCopyWith(OnSignIn value, $Res Function(OnSignIn) then) =
       _$OnSignInCopyWithImpl<$Res>;
-  @override
   $Res call({EmailAddress emailAddress, Password password});
 }
 
@@ -149,8 +140,10 @@ class _$OnSignIn implements OnSignIn {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result onSignIn(EmailAddress emailAddress, Password password),
+    @required Result onLanguageChange(Locale locale),
   }) {
     assert(onSignIn != null);
+    assert(onLanguageChange != null);
     return onSignIn(emailAddress, password);
   }
 
@@ -158,6 +151,7 @@ class _$OnSignIn implements OnSignIn {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result onSignIn(EmailAddress emailAddress, Password password),
+    Result onLanguageChange(Locale locale),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -171,8 +165,10 @@ class _$OnSignIn implements OnSignIn {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result onSignIn(OnSignIn value),
+    @required Result onLanguageChange(OnLanguageChange value),
   }) {
     assert(onSignIn != null);
+    assert(onLanguageChange != null);
     return onSignIn(this);
   }
 
@@ -180,6 +176,7 @@ class _$OnSignIn implements OnSignIn {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result onSignIn(OnSignIn value),
+    Result onLanguageChange(OnLanguageChange value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -195,12 +192,122 @@ abstract class OnSignIn implements SignInEvent {
       {@required EmailAddress emailAddress,
       @required Password password}) = _$OnSignIn;
 
-  @override
   EmailAddress get emailAddress;
-  @override
   Password get password;
-  @override
   $OnSignInCopyWith<OnSignIn> get copyWith;
+}
+
+abstract class $OnLanguageChangeCopyWith<$Res> {
+  factory $OnLanguageChangeCopyWith(
+          OnLanguageChange value, $Res Function(OnLanguageChange) then) =
+      _$OnLanguageChangeCopyWithImpl<$Res>;
+  $Res call({Locale locale});
+}
+
+class _$OnLanguageChangeCopyWithImpl<$Res>
+    extends _$SignInEventCopyWithImpl<$Res>
+    implements $OnLanguageChangeCopyWith<$Res> {
+  _$OnLanguageChangeCopyWithImpl(
+      OnLanguageChange _value, $Res Function(OnLanguageChange) _then)
+      : super(_value, (v) => _then(v as OnLanguageChange));
+
+  @override
+  OnLanguageChange get _value => super._value as OnLanguageChange;
+
+  @override
+  $Res call({
+    Object locale = freezed,
+  }) {
+    return _then(OnLanguageChange(
+      locale: locale == freezed ? _value.locale : locale as Locale,
+    ));
+  }
+}
+
+class _$OnLanguageChange implements OnLanguageChange {
+  const _$OnLanguageChange({@required this.locale}) : assert(locale != null);
+
+  @override
+  final Locale locale;
+
+  @override
+  String toString() {
+    return 'SignInEvent.onLanguageChange(locale: $locale)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is OnLanguageChange &&
+            (identical(other.locale, locale) ||
+                const DeepCollectionEquality().equals(other.locale, locale)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(locale);
+
+  @override
+  $OnLanguageChangeCopyWith<OnLanguageChange> get copyWith =>
+      _$OnLanguageChangeCopyWithImpl<OnLanguageChange>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result onSignIn(EmailAddress emailAddress, Password password),
+    @required Result onLanguageChange(Locale locale),
+  }) {
+    assert(onSignIn != null);
+    assert(onLanguageChange != null);
+    return onLanguageChange(locale);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result onSignIn(EmailAddress emailAddress, Password password),
+    Result onLanguageChange(Locale locale),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (onLanguageChange != null) {
+      return onLanguageChange(locale);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result onSignIn(OnSignIn value),
+    @required Result onLanguageChange(OnLanguageChange value),
+  }) {
+    assert(onSignIn != null);
+    assert(onLanguageChange != null);
+    return onLanguageChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result onSignIn(OnSignIn value),
+    Result onLanguageChange(OnLanguageChange value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (onLanguageChange != null) {
+      return onLanguageChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnLanguageChange implements SignInEvent {
+  const factory OnLanguageChange({@required Locale locale}) =
+      _$OnLanguageChange;
+
+  Locale get locale;
+  $OnLanguageChangeCopyWith<OnLanguageChange> get copyWith;
 }
 
 class _$SignInStateTearOff {

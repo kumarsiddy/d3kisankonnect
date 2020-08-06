@@ -6,4 +6,6 @@ abstract class SignInEvent with _$SignInEvent {
     @required EmailAddress emailAddress,
     @required Password password,
   }) = OnSignIn;
+  const factory SignInEvent.onLanguageChange({@required Locale locale}) =
+      OnLanguageChange;
 }

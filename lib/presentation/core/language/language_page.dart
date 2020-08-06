@@ -1,8 +1,11 @@
+import 'package:d3kisankonnect/application/onboarding/sign_in/sign_in_bloc.dart';
+import 'package:d3kisankonnect/di/injection.dart';
 import 'package:d3kisankonnect/lang/app_localizations.dart';
 import 'package:d3kisankonnect/lang/app_localization_handler.dart';
 import 'package:d3kisankonnect/presentation/core/customview/button.dart';
 import 'package:d3kisankonnect/presentation/core/language/app_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LanguagePage extends StatelessWidget {
   @override
@@ -11,7 +14,10 @@ class LanguagePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(getString(context, 'english')),
       ),
-      body: _LanguageForm(),
+      body: BlocProvider(
+        create: (BuildContext context) => getIt<SignInBloc>(),
+        child: SingleChildScrollView(child: _LanguageForm()),
+      ),
     );
   }
 }
@@ -19,6 +25,12 @@ class LanguagePage extends StatelessWidget {
 class _LanguageForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    _onLanguageSelected(Locale newLocale) {
+      context
+          .bloc<SignInBloc>()
+          .add(SignInEvent.onLanguageChange(locale: newLocale));
+    }
+
     return Container(
       padding: EdgeInsets.all(12),
       child: Column(
@@ -44,6 +56,4 @@ class _LanguageForm extends StatelessWidget {
       ),
     );
   }
-
-  _onLanguageSelected(Locale locale) => localeHandler.setLocale(locale);
 }
