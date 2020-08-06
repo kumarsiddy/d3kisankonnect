@@ -1,6 +1,7 @@
 import 'package:d3kisankonnect/infrastructure/core/local_storage/hive/hive_data_storage_handler.dart';
 import 'package:d3kisankonnect/infrastructure/core/local_storage/i_local_storage_facade.dart';
 import 'package:d3kisankonnect/lang/app_localizations.dart';
+import 'package:d3kisankonnect/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:d3kisankonnect/domain/onboarding/i_auth_facade.dart';
 import 'package:d3kisankonnect/domain/onboarding/value_objects.dart';
+import 'package:d3kisankonnect/lang/app_localization_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -33,6 +34,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         (r) => const SignInState.signedInUsingEmailAndPassword(),
       );
     }, onLanguageChange: (OnLanguageChange value) async* {
+      appLocaleHandler.setLocale(value.locale);
       await _authFacade.saveLocale(value.locale);
     });
   }

@@ -22,12 +22,12 @@ class AppLocalizations {
   }
 
   static Option<String> getKeyFromLocale(Locale locale) {
-    supportedLanguageMap.forEach((key, value) {
-      if (locale == value) {
-        return key;
+    for (String key in supportedLanguageMap.keys) {
+      if (supportedLanguageMap[key].languageCode == locale.languageCode) {
+        return some(key);
       }
-      return None();
-    });
+    }
+
     return None();
   }
 

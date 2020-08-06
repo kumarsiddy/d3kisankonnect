@@ -1,3 +1,4 @@
+import 'package:d3kisankonnect/logger.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';

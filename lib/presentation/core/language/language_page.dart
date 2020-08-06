@@ -25,6 +25,12 @@ class LanguagePage extends StatelessWidget {
 class _LanguageForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    _onLanguageSelected(Locale newLocale) {
+      context
+          .bloc<SignInBloc>()
+          .add(SignInEvent.onLanguageChange(locale: newLocale));
+    }
+
     return Container(
       padding: EdgeInsets.all(12),
       child: Column(
@@ -50,6 +56,4 @@ class _LanguageForm extends StatelessWidget {
       ),
     );
   }
-
-  _onLanguageSelected(Locale locale) => appLocaleHandler.setLocale(locale);
 }
