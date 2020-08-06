@@ -30,8 +30,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         yield SplashState.authenticated();
       else
         yield SplashState.unaunthenticated();
-    }, savedLanguageSelectionRequested:
-        (SavedLanguageSelectionRequested value) async* {
+    }, getSavedLanguageRequested: (GetSavedLanguageRequested value) async* {
       Locale locale = await _authFacade.getSavedLocale();
       appLocaleHandler.setLocale(locale);
       logger.d('from splash called${locale.languageCode}');

@@ -24,4 +24,6 @@ abstract class IAuthFacade {
   Future<Map<String, String>> getLocaleJsonString(Locale locale);
 
   Future<Locale> getSavedLocale();
+
+  Future<void> saveLocale(Locale locale);
 }

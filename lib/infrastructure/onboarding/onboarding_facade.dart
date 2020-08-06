@@ -114,4 +114,9 @@ class AuthFacade implements IAuthFacade {
   Future<Locale> getSavedLocale() {
     return _localStorageFacade.getLocale();
   }
+
+  @override
+  Future<void> saveLocale(Locale locale) async{
+    await _localStorageFacade.saveLocale(locale);
+  }
 }

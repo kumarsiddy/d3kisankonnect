@@ -17,7 +17,7 @@ class Splash extends StatelessWidget {
           create: (context) {
             SplashBloc splashBloc = getIt<SplashBloc>();
             splashBloc.add(const SplashEvent.authCheckRequested());
-            splashBloc.add(const SplashEvent.savedLanguageSelectionRequested());
+            splashBloc.add(const SplashEvent.getSavedLanguageRequested());
             return splashBloc;
           },
         )
