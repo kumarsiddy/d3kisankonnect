@@ -45,5 +45,5 @@ class _LanguageForm extends StatelessWidget {
     );
   }
 
-  _onLanguageSelected(Locale locale) => localeHandler.setLocale(locale);
+  _onLanguageSelected(Locale locale) => appLocaleHandler.setLocale(locale);
 }

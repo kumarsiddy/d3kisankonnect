@@ -25,7 +25,7 @@ String getString(BuildContext context, String key) {
 
 // This is to maintain single object throughout the app lifecycle.
 final _appLocalizationHandler = _AppLocalizationHandler();
-_AppLocalizationHandler get localeHandler {
+_AppLocalizationHandler get appLocaleHandler {
   if (_appLocalizationHandler._localeSubject.isClosed) {
     _appLocalizationHandler._localeSubject = PublishSubject<Locale>();
   }

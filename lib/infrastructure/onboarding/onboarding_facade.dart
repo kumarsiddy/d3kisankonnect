@@ -109,4 +109,9 @@ class AuthFacade implements IAuthFacade {
 // Returning default language json from asset folder if everything fails
     return await _languageCacheHandler.getDefaultLocaleJson();
   }
+
+  @override
+  Future<Locale> getSavedLocale() {
+    return _localStorageFacade.getLocale();
+  }
 }

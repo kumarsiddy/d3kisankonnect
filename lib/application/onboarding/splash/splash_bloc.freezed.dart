@@ -16,6 +16,11 @@ class _$SplashEventTearOff {
   AuthCheckRequested authCheckRequested() {
     return const AuthCheckRequested();
   }
+
+// ignore: unused_element
+  SavedLanguageSelectionRequested savedLanguageSelectionRequested() {
+    return const SavedLanguageSelectionRequested();
+  }
 }
 
 // ignore: unused_element
@@ -25,19 +30,26 @@ mixin _$SplashEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result authCheckRequested(),
+    @required Result savedLanguageSelectionRequested(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result authCheckRequested(),
+    Result savedLanguageSelectionRequested(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result authCheckRequested(AuthCheckRequested value),
+    @required
+        Result savedLanguageSelectionRequested(
+            SavedLanguageSelectionRequested value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result authCheckRequested(AuthCheckRequested value),
+    Result savedLanguageSelectionRequested(
+        SavedLanguageSelectionRequested value),
     @required Result orElse(),
   });
 }
@@ -93,8 +105,10 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result authCheckRequested(),
+    @required Result savedLanguageSelectionRequested(),
   }) {
     assert(authCheckRequested != null);
+    assert(savedLanguageSelectionRequested != null);
     return authCheckRequested();
   }
 
@@ -102,6 +116,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result authCheckRequested(),
+    Result savedLanguageSelectionRequested(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -115,8 +130,12 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result authCheckRequested(AuthCheckRequested value),
+    @required
+        Result savedLanguageSelectionRequested(
+            SavedLanguageSelectionRequested value),
   }) {
     assert(authCheckRequested != null);
+    assert(savedLanguageSelectionRequested != null);
     return authCheckRequested(this);
   }
 
@@ -124,6 +143,8 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result authCheckRequested(AuthCheckRequested value),
+    Result savedLanguageSelectionRequested(
+        SavedLanguageSelectionRequested value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -136,6 +157,102 @@ class _$AuthCheckRequested implements AuthCheckRequested {
 
 abstract class AuthCheckRequested implements SplashEvent {
   const factory AuthCheckRequested() = _$AuthCheckRequested;
+}
+
+abstract class $SavedLanguageSelectionRequestedCopyWith<$Res> {
+  factory $SavedLanguageSelectionRequestedCopyWith(
+          SavedLanguageSelectionRequested value,
+          $Res Function(SavedLanguageSelectionRequested) then) =
+      _$SavedLanguageSelectionRequestedCopyWithImpl<$Res>;
+}
+
+class _$SavedLanguageSelectionRequestedCopyWithImpl<$Res>
+    extends _$SplashEventCopyWithImpl<$Res>
+    implements $SavedLanguageSelectionRequestedCopyWith<$Res> {
+  _$SavedLanguageSelectionRequestedCopyWithImpl(
+      SavedLanguageSelectionRequested _value,
+      $Res Function(SavedLanguageSelectionRequested) _then)
+      : super(_value, (v) => _then(v as SavedLanguageSelectionRequested));
+
+  @override
+  SavedLanguageSelectionRequested get _value =>
+      super._value as SavedLanguageSelectionRequested;
+}
+
+class _$SavedLanguageSelectionRequested
+    implements SavedLanguageSelectionRequested {
+  const _$SavedLanguageSelectionRequested();
+
+  @override
+  String toString() {
+    return 'SplashEvent.savedLanguageSelectionRequested()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is SavedLanguageSelectionRequested);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result authCheckRequested(),
+    @required Result savedLanguageSelectionRequested(),
+  }) {
+    assert(authCheckRequested != null);
+    assert(savedLanguageSelectionRequested != null);
+    return savedLanguageSelectionRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result authCheckRequested(),
+    Result savedLanguageSelectionRequested(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (savedLanguageSelectionRequested != null) {
+      return savedLanguageSelectionRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result authCheckRequested(AuthCheckRequested value),
+    @required
+        Result savedLanguageSelectionRequested(
+            SavedLanguageSelectionRequested value),
+  }) {
+    assert(authCheckRequested != null);
+    assert(savedLanguageSelectionRequested != null);
+    return savedLanguageSelectionRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result authCheckRequested(AuthCheckRequested value),
+    Result savedLanguageSelectionRequested(
+        SavedLanguageSelectionRequested value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (savedLanguageSelectionRequested != null) {
+      return savedLanguageSelectionRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SavedLanguageSelectionRequested implements SplashEvent {
+  const factory SavedLanguageSelectionRequested() =
+      _$SavedLanguageSelectionRequested;
 }
 
 class _$SplashStateTearOff {
