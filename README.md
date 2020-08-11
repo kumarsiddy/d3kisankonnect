@@ -1,16 +1,15 @@
 # d3kisankonnect
 
-A new Flutter project.
+A new Flutter project based on best design principle on domain driven design pattern.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This application handles following thing in best domain designed way:-
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1) Network handling
+2) Error handling
+3) Bloc pattern
+4) Route handling
+5) Multi language support(based on language residing in assets folder as well as coming from server)
+6) Dependency injection
+7) Mutli environment setup
